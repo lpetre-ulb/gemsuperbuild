@@ -35,5 +35,6 @@ if(ARM_BUILD)
 
   # Build the libraries
   include(External_log4cplus)
+  include(External_xerces-c)
 endif(ARM_BUILD)
 

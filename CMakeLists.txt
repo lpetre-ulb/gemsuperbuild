@@ -32,5 +32,8 @@ if(ARM_BUILD)
   if(NOT EXISTS "${PETA_SYSROOT}")
     message(FATAL_ERROR "Please define the PETA_SYSROOT variable.")
   endif()
+
+  # Build the libraries
+  include(External_log4cplus)
 endif(ARM_BUILD)
 

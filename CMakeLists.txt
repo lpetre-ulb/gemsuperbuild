@@ -52,6 +52,7 @@ if(X86_64_BUILD)
     include(External_xdaq)
   endif()
 
+  include(External_wiscrpcsvc)
   include(External_reg_utils_x86_64)
 endif(X86_64_BUILD)
 

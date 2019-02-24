@@ -37,5 +37,12 @@ if(ARM_BUILD)
   include(External_log4cplus)
   include(External_xerces-c)
   include(External_lmdb)
+
+  # Build the software
+  include(External_reg_utils_arm)
 endif(ARM_BUILD)
+
+if(X86_64_BUILD)
+  include(External_reg_utils_x86_64)
+endif(X86_64_BUILD)
 

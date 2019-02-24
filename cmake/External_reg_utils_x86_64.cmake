@@ -1,0 +1,9 @@
+ExternalProject_Add(reg_utils_x86_64
+  PREFIX "${CMAKE_CURRENT_BINARY_DIR}/reg_utils"
+  INSTALL_DIR "${CMAKE_BINARY_DIR}/install/x86_64"
+  SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/reg_utils"
+  CMAKE_ARGS
+    "-DCMAKE_INSTALL_PREFIX=/usr"
+  INSTALL_COMMAND make install "DESTDIR=<INSTALL_DIR>"
+)
+

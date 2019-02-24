@@ -5,9 +5,10 @@ ExternalProject_Add(lmdb
   CONFIGURE_COMMAND ""
   BUILD_IN_SOURCE TRUE
   BUILD_COMMAND make -C ./libraries/liblmdb/ -j8
-    "prefix=/usr"
     "CC=arm-linux-gnueabihf-gcc"
     "CFLAGS=-fomit-frame-pointer -pipe -fno-common -fno-builtin -Wall -march=armv7-a -mfpu=neon -mfloat-abi=hard -mthumb-interwork -mtune=cortex-a9 -DEMBED -Dlinux -D__linux__ -Dunix -fPIC --sysroot=${PETA_SYSROOT} -pthread"
-  INSTALL_COMMAND make -C ./libraries/liblmdb install "DESTDIR=<INSTALL_DIR>"
+  INSTALL_COMMAND make -C ./libraries/liblmdb install
+    "prefix=/usr"
+    "DESTDIR=<INSTALL_DIR>"
 )
 

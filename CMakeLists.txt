@@ -44,6 +44,14 @@ if(ARM_BUILD)
 endif(ARM_BUILD)
 
 if(X86_64_BUILD)
+  option(BUILD_XDAQ 
+    "Build XDAQ from sources."
+  OFF)
+
+  if(BUILD_XDAQ)
+    include(External_xdaq)
+  endif()
+
   include(External_reg_utils_x86_64)
 endif(X86_64_BUILD)
 

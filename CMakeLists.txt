@@ -4,7 +4,8 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 # Prevent in-source builds
 include(PreventInSourceBuilds)
 
-project(gemsuperbuild)
+project(gemsuperbuild
+  LANGUAGES NONE)
 
 # This project is a superbuild...
 include(ExternalProject)

@@ -54,5 +54,6 @@ if(X86_64_BUILD)
 
   include(External_wiscrpcsvc)
   include(External_reg_utils_x86_64)
+  include(External_xhal_x86_64)
 endif(X86_64_BUILD)
 

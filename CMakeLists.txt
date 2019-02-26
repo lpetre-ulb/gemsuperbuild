@@ -10,16 +10,23 @@ project(gemsuperbuild
 # This project is a superbuild...
 include(ExternalProject)
 
-option(ARM_BUILD
-  "Build the software running on the ARM architecture (CTP7). \
-   It requires the Xilinx SDK and the Peta Linux image sysroot"
-  ON)
+option(CTP7_BUILD "\
+Build the software running on the CTP7 (ARM architecture). \
+It requires the Xilinx SDK and the CTP7 Linux image sysroot. \
+" ON
+)
 
-option(X86_64_BUILD
-  "Build the software running on the x86_64 architecture (main DAQ software)."
-  ON)
+option(GLIB_BUILD
+  "Build the sofware running on the GLIB."
+  OFF
+)
 
-if(ARM_BUILD)
+option(PC_BUILD
+  "Build the software running on the DAQ machine (amd64 architecture)."
+  ON
+)
+
+if(CTP7_BUILD)
   # Minimal check for the Xilinx SDK
   find_program(Xilinx-SDK
     arm-linux-gnueabihf-gcc
@@ -30,8 +37,8 @@ if(ARM_BUILD)
   endif()
 
   # Ensure that the Peta sysroot path exist
-  if(NOT EXISTS "${PETA_SYSROOT}")
-    message(FATAL_ERROR "Please define the PETA_SYSROOT variable.")
+  if(NOT EXISTS "${CTP7_SYSROOT}")
+    message(FATAL_ERROR "Please define the CTP7_SYSROOT variable.")
   endif()
 
   # Build the libraries
@@ -41,9 +48,12 @@ if(ARM_BUILD)
 
   # Build the software
   include(External_reg_utils_arm)
-endif(ARM_BUILD)
+endif(CTP7_BUILD)
 
-if(X86_64_BUILD)
+if(GLIB_BUILD)
+endif(GLIB_BUILD)
+
+if(PC_BUILD)
   option(BUILD_XDAQ 
     "Build XDAQ from sources."
   OFF)
@@ -55,5 +65,5 @@ if(X86_64_BUILD)
   include(External_wiscrpcsvc)
   include(External_reg_utils_x86_64)
   include(External_xhal_x86_64)
-endif(X86_64_BUILD)
+endif(PC_BUILD)
 

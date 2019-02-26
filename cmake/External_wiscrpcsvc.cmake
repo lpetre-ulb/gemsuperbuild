@@ -7,6 +7,6 @@ ExternalProject_Add(wiscrpcsvc
   BUILD_COMMAND
     make -C ./libwiscrpcsvc-client build
   INSTALL_COMMAND 
-    install ./libwiscrpcsvc-client/libwiscrpcsvc.so "<INSTALL_DIR>/usr/lib"
+    install -D ./libwiscrpcsvc-client/libwiscrpcsvc.so "<INSTALL_DIR>/usr/lib/libwiscrpcsvc.so"
 )
 

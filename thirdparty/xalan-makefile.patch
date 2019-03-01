@@ -1,0 +1,11 @@
+--- a/extern/xalan/Makefile
++++ b/extern/xalan/Makefile
+@@ -87,7 +87,7 @@
+ 	-rm -rf $(XDAQ_PLATFORM)
+ 	-rm -rf xalan-c-1.11 
+ 	tar -zxf xalan_c-1.11-src.tar.gz
+-	cd xalan-c-1.11 /c
++	cd xalan-c-1.11/c
+ 
+ all: xalan-c-1.11/c/runConfigure
+ 	cd ./xalan-c-1.11/c; \

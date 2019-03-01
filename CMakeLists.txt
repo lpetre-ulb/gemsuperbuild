@@ -65,5 +65,6 @@ if(PC_BUILD)
   include(External_wiscrpcsvc)
   include(External_reg_utils_x86_64)
   include(External_xhal_x86_64)
+  include(External_cactus)
 endif(PC_BUILD)
 

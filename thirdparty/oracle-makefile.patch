@@ -1,0 +1,25 @@
+--- a/extern/oracle/Makefile
++++ b/extern/oracle/Makefile
+@@ -115,14 +115,14 @@
+ 	-unzip -qo $(FILE1);
+ 	-unzip -qo $(FILE2);
+ 	-unzip -qo $(FILE3);
+-	-mkdir -p $(XDAQ_ROOT)/$(XDAQ_PLATFORM)/include
+-	-mkdir -p $(XDAQ_ROOT)/$(XDAQ_PLATFORM)/lib
+-	-mkdir -p $(XDAQ_ROOT)/$(XDAQ_PLATFORM)/bin
+-	install -m 655 instantclient_12_1/sdk/include/* $(XDAQ_ROOT)/$(XDAQ_PLATFORM)/include;
+-	install -m 655 instantclient_12_1/lib* $(XDAQ_ROOT)/$(XDAQ_PLATFORM)/lib;
+-	install -m 655 instantclient_12_1/libocci.so.12.1 $(XDAQ_ROOT)/$(XDAQ_PLATFORM)/lib/libocci.so;
+-	install -m 655 instantclient_12_1/libclntsh.so.12.1 $(XDAQ_ROOT)/$(XDAQ_PLATFORM)/lib/libclntsh.so;
+-	install -m 755 instantclient_12_1/sqlplus $(XDAQ_ROOT)/$(XDAQ_PLATFORM)/bin
++	-mkdir -p $(INSTALL_PREFIX)/$(XDAQ_PLATFORM)/include
++	-mkdir -p $(INSTALL_PREFIX)/$(XDAQ_PLATFORM)/lib
++	-mkdir -p $(INSTALL_PREFIX)/$(XDAQ_PLATFORM)/bin
++	install -m 655 instantclient_12_1/sdk/include/* $(INSTALL_PREFIX)/$(XDAQ_PLATFORM)/include;
++	install -m 655 instantclient_12_1/lib* $(INSTALL_PREFIX)/$(XDAQ_PLATFORM)/lib;
++	install -m 655 instantclient_12_1/libocci.so.12.1 $(INSTALL_PREFIX)/$(XDAQ_PLATFORM)/lib/libocci.so;
++	install -m 655 instantclient_12_1/libclntsh.so.12.1 $(INSTALL_PREFIX)/$(XDAQ_PLATFORM)/lib/libclntsh.so;
++	install -m 755 instantclient_12_1/sqlplus $(INSTALL_PREFIX)/$(XDAQ_PLATFORM)/bin
+ 
+ #clean= _cleanall
+ #_cleanall:

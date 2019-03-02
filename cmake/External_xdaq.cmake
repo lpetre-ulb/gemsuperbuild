@@ -7,6 +7,7 @@ ExternalProject_Add(xdaq-core
   URL_HASH SHA256=2cb223ded3db28f67443f38dc7b40a432667643fc3f96983402b7f4c3cdafcfa
 
   PATCH_COMMAND patch -p1 -i "${CMAKE_SOURCE_DIR}/thirdparty/xalan-makefile.patch"
+  COMMAND       patch -p1 -i "${CMAKE_SOURCE_DIR}/thirdparty/xdaq-core-cpp11.patch"
 
   CONFIGURE_COMMAND ""
   BUILD_IN_SOURCE TRUE
@@ -37,6 +38,7 @@ ExternalProject_Add(xdaq-worksuite
   URL_HASH SHA256=2a40740227e414f45be0c36c70ce5d590756e2e9156327730ad74bfb6094a0de
 
   PATCH_COMMAND patch -p1 -i "${CMAKE_SOURCE_DIR}/thirdparty/oracle-makefile.patch"
+  COMMAND       patch -p1 -i "${CMAKE_SOURCE_DIR}/thirdparty/xdaq-worksuite-cpp11.patch"
   COMMAND       sed "s/BUILD_HOME/XDAQ_ROOT/g" "${CMAKE_CURRENT_BINARY_DIR}/thirdparty/xdaq/core/src/xdaq-core/mfDefs.core" > "<SOURCE_DIR>/mfDefs.core"
   COMMAND       echo "include <SOURCE_DIR>/mfDefs.core" >> "<SOURCE_DIR>/mfDefs.worksuite"
 

@@ -1,0 +1,60 @@
+diff -ur amc13_v1_2_13/amc13/Makefile amc13_v1_2_13_b/amc13/Makefile
+--- amc13_v1_2_13/amc13/Makefile	2018-11-07 18:36:46.000000000 +0100
++++ amc13_v1_2_13_b/amc13/Makefile	2019-03-02 22:12:29.437981457 +0100
+@@ -90,6 +90,12 @@
+ -include $(OBJECT_FILES:.o=.d)
+ -include $(LIBRARY_OBJECT_FILES_UNPACKER:.o=.d)
+ 
++install:
++	mkdir -p ${INSTALL_PREFIX}/{include,lib,name}
++	find ./include \( -name "*.[hi]" -o -name "*.hpp" -o -name "*.hh" -o -name "*.hxx" \) -exec install -D -m 644 {} ${INSTALL_PREFIX}/{} \;
++	find ./lib -name ".svn" -prune -o -exec install -D -m 755 {} ${INSTALL_PREFIX}/{} \;
++	find ./etc -name ".svn" -prune -o -exec install -D -m 644 {} ${INSTALL_PREFIX}/{} \;
++
+ rpm: _rpmall
+ _rpmall: 
+ 	mkdir -p ${RPMBUILD_DIR}/{RPMS/{i386,i586,i686,x86_64},SPECS,BUILD,SOURCES,SRPMS}
+diff -ur amc13_v1_2_13/Makefile amc13_v1_2_13_b/Makefile
+--- amc13_v1_2_13/Makefile	2015-03-10 19:50:23.000000000 +0100
++++ amc13_v1_2_13_b/Makefile	2019-03-02 22:00:13.600619039 +0100
+@@ -7,7 +7,7 @@
+ 
+ FLAGS = $(ifeq $(MAKEFLAGS) "","",-$(MAKEFLAGS))
+ 
+-TARGETS=clean cleanrpm rpm build all
++TARGETS=clean cleanrpm rpm build all install
+ 
+ .PHONY: $(TARGETS)
+ default: build
+diff -ur amc13_v1_2_13/python/Makefile amc13_v1_2_13_b/python/Makefile
+--- amc13_v1_2_13/python/Makefile	2018-11-07 18:36:46.000000000 +0100
++++ amc13_v1_2_13_b/python/Makefile	2019-03-02 22:13:33.170706252 +0100
+@@ -41,6 +41,8 @@
+ 	$(AMC13_ROOT)/amc13/lib \
+ 	$(CACTUS_ROOT)/lib 
+ 
+-
+ include ${AMC13_ROOT}/config/mfRules.mk
+ include ${AMC13_ROOT}/config/mfPythonRPMRules.mk
++
++install:
++
+diff -ur amc13_v1_2_13/tools/Makefile amc13_v1_2_13_b/tools/Makefile
+--- amc13_v1_2_13/tools/Makefile	2018-11-07 18:36:46.000000000 +0100
++++ amc13_v1_2_13_b/tools/Makefile	2019-03-02 22:12:26.678950079 +0100
+@@ -99,6 +99,15 @@
+ 
+ -include $(LIBRARY_OBJECT_FILES:.o=.d)
+ 
++install:
++	# create the folder structure
++	mkdir -p ${INSTALL_PREFIX}/bin/amc13/
++	mkdir -p ${INSTALL_PREFIX}/lib/
++	
++	# copy files over
++	find ./bin -name ".svn" -prune -o -exec install -D -m 755 -t ${INSTALL_PREFIX}/bin/amc13 {} \;
++	find ./lib -name ".svn" -prune -o -exec install -D -m 755 {} ${INSTALL_PREFIX}/{} \;
++	
+ rpm: _rpmall
+ _rpmall: 
+ 	# create the folder structure

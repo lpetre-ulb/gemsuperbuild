@@ -9,7 +9,7 @@ ExternalProject_Add(xerces-c
     "CXX=arm-linux-gnueabihf-g++"
     "CXXFLAGS=-fomit-frame-pointer -pipe -fno-common -fno-builtin -Wall -march=armv7-a -mfpu=neon -mfloat-abi=hard -mthumb-interwork -mtune=cortex-a9 -DEMBED -Dlinux -D__linux__ -Dunix -fPIC"
     "CFLAGS=-fomit-frame-pointer -pipe -fno-common -fno-builtin -Wall -march=armv7-a -mfpu=neon -mfloat-abi=hard -mthumb-interwork -mtune=cortex-a9 -DEMBED -Dlinux -D__linux__ -Dunix -fPIC"
-  BUILD_COMMAND make -j8
-  INSTALL_COMMAND make install "DESTDIR=<INSTALL_DIR>"
+  BUILD_COMMAND $(MAKE)
+  INSTALL_COMMAND $(MAKE) install "DESTDIR=<INSTALL_DIR>"
 )
 

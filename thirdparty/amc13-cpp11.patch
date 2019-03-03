@@ -1,0 +1,11 @@
+--- a/amc13/src/common/AMC13.cc
++++ b/amc13/src/common/AMC13.cc
+@@ -92,7 +92,7 @@
+       // read register 1 for sanity  check
+       t1r1 = read( T1, 1);
+       t2r1 = read( T2, 1);
+-    } catch (uhal::exception::exception & e) {
++    } catch (uhal::exception::exception &) {
+       amc13::Exception::BadAMC13 e;
+       e.Append( "AMC13::initAMC13() - Error reading firmware version from T1 or T2");
+       throw e;

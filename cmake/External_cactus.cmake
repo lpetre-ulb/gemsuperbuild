@@ -25,7 +25,8 @@ ExternalProject_Add(cactus-amc13
   #URL "https://svnweb.cern.ch/trac/cactus/browser/tags/amc13/amc13_v1_2_13?rev=50949&format=zip"
   URL "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/amc13_v1_2_13.tar.xz"
 
-  PATCH_COMMAND patch -p1 -i "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/amc13-python3.patch"
+  PATCH_COMMAND patch -p1 -i "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/amc13-cpp11.patch"
+  COMMAND       patch -p1 -i "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/amc13-python3.patch"
   COMMAND       patch -p1 -i "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/amc13-install.patch"
 
   CONFIGURE_COMMAND ""

@@ -6,10 +6,10 @@ ExternalProject_Add(cactus-ipbus
 
   CONFIGURE_COMMAND ""
   BUILD_IN_SOURCE TRUE
-  BUILD_COMMAND make
+  BUILD_COMMAND $(MAKE)
     Set=uhal
     "prefix=<INSTALL_DIR>"
-  INSTALL_COMMAND make install
+  INSTALL_COMMAND $(MAKE) install
     Set=uhal
     "prefix=<INSTALL_DIR>"
 )

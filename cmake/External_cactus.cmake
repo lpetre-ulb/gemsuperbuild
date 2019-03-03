@@ -35,6 +35,7 @@ ExternalProject_Add(cactus-amc13
   BUILD_COMMAND make
     "CACTUS_ROOT=${CMAKE_BINARY_DIR}/install/cactus"
     "INSTALL_PREFIX=<INSTALL_DIR>"
+    "SHELL=bash"
   INSTALL_COMMAND make install
     "CACTUS_ROOT=${CMAKE_BINARY_DIR}/install/cactus"
     "INSTALL_PREFIX=<INSTALL_DIR>"

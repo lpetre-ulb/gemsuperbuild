@@ -28,6 +28,7 @@ ExternalProject_Add(cactus-amc13
   PATCH_COMMAND patch -p1 -i "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/amc13-cpp11.patch"
   COMMAND       patch -p1 -i "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/amc13-python3.patch"
   COMMAND       patch -p1 -i "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/amc13-install.patch"
+  COMMAND       patch -p1 -i "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/amc13-as-needed.patch"
 
   CONFIGURE_COMMAND ""
   BUILD_IN_SOURCE TRUE

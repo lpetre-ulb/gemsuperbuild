@@ -1,0 +1,51 @@
+diff -ur a/amc13/Makefile b/amc13/Makefile
+--- a/amc13/Makefile
++++ b/amc13/Makefile
+@@ -35,13 +35,13 @@
+ 	-L$(CACTUS_ROOT)/lib 
+ 
+ LIBRARIES =     -lpthread 			\
++                -lcactus_uhal_log 		\
++                -lcactus_uhal_grammars 		\
++                -lcactus_uhal_uhal		\
+                 -lboost_filesystem 		\
+                 -lboost_regex 			\
+                 -lboost_system 			\
+-                -lboost_thread 			\
+-                -lcactus_uhal_log 		\
+-                -lcactus_uhal_grammars 		\
+-                -lcactus_uhal_uhal
++                -lboost_thread
+ 
+ 
+ CPP_FLAGS = -g -O3 -rdynamic -Wall -MMD -MP -fPIC ${INCLUDE_PATH} -fno-strict-aliasing
+@@ -74,7 +74,7 @@
+ 	@svn -R info | awk 'BEGIN{version=0}{if($$3 == "Rev:"){if($$4 > version){version = $$4}}}END{print "const int amc13::AMC13::Version(" version ");"}' >> ${VERSION_SRC}
+ 	@g++ ${CPP_FLAGS} -c ${VERSION_SRC} -o ${VERSION_OBJ} ; rm ${VERSION_SRC} 
+ 	@#build the actual library
+-	g++ ${LINK_FLAGS} ${OBJECT_FILES} ${OBJECT_FILES_UNPACKER} ${VERSION_OBJ} -o $@ 
++	g++ ${OBJECT_FILES} ${OBJECT_FILES_UNPACKER} ${VERSION_OBJ} ${LINK_FLAGS} -o $@ 
+ 	@#remove any trace of the version file
+ 	@rm ${VERSION_OBJ}
+ 
+diff -ur a/tools/Makefile b/tools/Makefile
+--- a/tools/Makefile
++++ b/tools/Makefile
+@@ -79,7 +79,7 @@
+ # Executables
+ # ------------------------
+ ${EXECUTABLES}: bin/%.exe: obj/%.o ${EXECUTABLE_OBJECT_FILES}
+-	g++ ${LINK_EXECUTABLE_FLAGS} $< -o $@
++	g++ $< ${LINK_EXECUTABLE_FLAGS} -o $@
+ 
+ ${EXECUTABLE_OBJECT_FILES}: obj/%.o : src/common/%.cxx
+ 	mkdir -p {bin,obj,lib}
+@@ -91,7 +91,7 @@
+ # library
+ # ------------------------
+ ${LIBRARY}: ${LIBRARY_OBJECT_FILES}
+-	g++ ${LINK_LIBRARY_FLAGS} ${LIBRARY_OBJECT_FILES} -o $@
++	g++ ${LIBRARY_OBJECT_FILES} ${LINK_LIBRARY_FLAGS} -o $@
+ 
+ ${LIBRARY_OBJECT_FILES}: obj/%.o : src/common/%.cc 
+ 	mkdir -p {lib,obj}

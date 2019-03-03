@@ -21,3 +21,7 @@ make
 * `PC_BUILD` : Build the software for the DAQ machine (default : ON)
   * `BUILD_XDAQ` : Enable this option if you want to compile `xDAQ` in tree (default: OFF)
 
+### Advanced
+
+* `GEM_SUPERBUILD_CACHE_DIR` : Defines the cache path for the archives. If you frequently delete your build directory, this avoid re-downloading the archives.
+

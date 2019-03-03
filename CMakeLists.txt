@@ -10,6 +10,10 @@ project(gemsuperbuild
 # This project is a superbuild...
 include(ExternalProject)
 
+# Provide the cache
+include(GEMSuperbuildCache)
+
+# GEM targets
 option(CTP7_BUILD "\
 Build the software running on the CTP7 (ARM architecture). \
 It requires the Xilinx SDK and the CTP7 Linux image sysroot. \

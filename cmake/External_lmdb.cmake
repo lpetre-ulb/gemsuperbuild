@@ -1,7 +1,11 @@
 ExternalProject_Add(lmdb
   PREFIX "${CMAKE_CURRENT_BINARY_DIR}/thirdparty/lmdb"
   INSTALL_DIR "${CMAKE_BINARY_DIR}/install/arm"
-  DOWNLOAD_COMMAND URL "${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/LMDB_0.9.19.tar.gz"
+
+  DOWNLOAD_DIR "${GEM_SUPERBUILD_CACHE_DIR}"
+  URL "https://github.com/LMDB/lmdb/archive/LMDB_0.9.19.tar.gz"
+  URL_HASH SHA256=108532fb94c6f227558d45be3f3347b52539f0f58290a7bb31ec06c462d05326
+
   CONFIGURE_COMMAND ""
   BUILD_IN_SOURCE TRUE
   BUILD_COMMAND make -C ./libraries/liblmdb/ -j8

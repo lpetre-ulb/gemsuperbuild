@@ -2,12 +2,9 @@ ExternalProject_Add(xdaq-core
   PREFIX "${CMAKE_CURRENT_BINARY_DIR}/thirdparty/xdaq/core"
   INSTALL_DIR "${CMAKE_BINARY_DIR}/install/xdaq"
 
-  # Use the archive download instead of the Git clone
-  # The CMake Git mode has a bug which triggers a build on every 
-  # run : https://gitlab.kitware.com/cmake/cmake/issues/16419
-  # Because the dependency within xDAQ is complex, most of the
-  # sources are then built on every run and we do not want that.
+  DOWNLOAD_DIR "${GEM_SUPERBUILD_CACHE_DIR}"
   URL https://gitlab.cern.ch/cmsos/core/-/archive/release_14_10_0_0/core-release_14_10_0_0.tar.bz2
+  URL_HASH SHA256=2cb223ded3db28f67443f38dc7b40a432667643fc3f96983402b7f4c3cdafcfa
 
   PATCH_COMMAND patch -p1 -i "${CMAKE_SOURCE_DIR}/thirdparty/xalan-makefile.patch"
 
@@ -35,12 +32,9 @@ ExternalProject_Add(xdaq-worksuite
   PREFIX "${CMAKE_CURRENT_BINARY_DIR}/thirdparty/xdaq/worksuite"
   INSTALL_DIR "${CMAKE_BINARY_DIR}/install/xdaq"
 
-  # Use the archive download instead of the Git clone
-  # The CMake Git mode has a bug which triggers a build on every 
-  # run : https://gitlab.kitware.com/cmake/cmake/issues/16419
-  # Because the dependency within xDAQ is complex, most of the
-  # sources are then built on every run and we do not want that.
+  DOWNLOAD_DIR "${GEM_SUPERBUILD_CACHE_DIR}"
   URL https://gitlab.cern.ch/cmsos/worksuite/-/archive/release_14_9_0_0/worksuite-release_14_9_0_0.tar.bz2
+  URL_HASH SHA256=2a40740227e414f45be0c36c70ce5d590756e2e9156327730ad74bfb6094a0de
 
   PATCH_COMMAND patch -p1 -i "${CMAKE_SOURCE_DIR}/thirdparty/oracle-makefile.patch"
   COMMAND       sed "s/BUILD_HOME/XDAQ_ROOT/g" "${CMAKE_CURRENT_BINARY_DIR}/thirdparty/xdaq/core/src/xdaq-core/mfDefs.core" > "<SOURCE_DIR>/mfDefs.core"

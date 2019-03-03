@@ -1,6 +1,5 @@
-diff -ur amc13_v1_2_13/amc13/Makefile amc13_v1_2_13_b/amc13/Makefile
---- amc13_v1_2_13/amc13/Makefile	2018-11-07 18:36:46.000000000 +0100
-+++ amc13_v1_2_13_b/amc13/Makefile	2019-03-02 22:12:29.437981457 +0100
+--- a/amc13/Makefile
++++ b/amc13/Makefile
 @@ -90,6 +90,12 @@
  -include $(OBJECT_FILES:.o=.d)
  -include $(LIBRARY_OBJECT_FILES_UNPACKER:.o=.d)
@@ -14,9 +13,8 @@ diff -ur amc13_v1_2_13/amc13/Makefile amc13_v1_2_13_b/amc13/Makefile
  rpm: _rpmall
  _rpmall: 
  	mkdir -p ${RPMBUILD_DIR}/{RPMS/{i386,i586,i686,x86_64},SPECS,BUILD,SOURCES,SRPMS}
-diff -ur amc13_v1_2_13/Makefile amc13_v1_2_13_b/Makefile
---- amc13_v1_2_13/Makefile	2015-03-10 19:50:23.000000000 +0100
-+++ amc13_v1_2_13_b/Makefile	2019-03-02 22:00:13.600619039 +0100
+--- a/Makefile
++++ b/Makefile
 @@ -7,7 +7,7 @@
  
  FLAGS = $(ifeq $(MAKEFLAGS) "","",-$(MAKEFLAGS))
@@ -26,9 +24,8 @@ diff -ur amc13_v1_2_13/Makefile amc13_v1_2_13_b/Makefile
  
  .PHONY: $(TARGETS)
  default: build
-diff -ur amc13_v1_2_13/python/Makefile amc13_v1_2_13_b/python/Makefile
---- amc13_v1_2_13/python/Makefile	2018-11-07 18:36:46.000000000 +0100
-+++ amc13_v1_2_13_b/python/Makefile	2019-03-02 22:13:33.170706252 +0100
+--- a/python/Makefile
++++ b/python/Makefile
 @@ -41,6 +41,8 @@
  	$(AMC13_ROOT)/amc13/lib \
  	$(CACTUS_ROOT)/lib 
@@ -39,9 +36,8 @@ diff -ur amc13_v1_2_13/python/Makefile amc13_v1_2_13_b/python/Makefile
 +
 +install:
 +
-diff -ur amc13_v1_2_13/tools/Makefile amc13_v1_2_13_b/tools/Makefile
---- amc13_v1_2_13/tools/Makefile	2018-11-07 18:36:46.000000000 +0100
-+++ amc13_v1_2_13_b/tools/Makefile	2019-03-02 22:12:26.678950079 +0100
+--- a/tools/Makefile
++++ b/tools/Makefile
 @@ -99,6 +99,15 @@
  
  -include $(LIBRARY_OBJECT_FILES:.o=.d)

@@ -1,0 +1,22 @@
+--- a/config/mfCommonDefs.mk
++++ b/config/mfCommonDefs.mk
+@@ -4,7 +4,7 @@
+ 
+ # Cactus config. This section shall be sources from /opt/cactus/config
+ CACTUS_ROOT ?= /opt/cactus
+-CACTUS_PLATFORM=$(shell /usr/bin/python -c "import platform; print platform.platform()")
++CACTUS_PLATFORM=$(shell /usr/bin/python -c "import platform; print(platform.platform())")
+ CACTUS_OS="unknown.os"
+ 
+ UNAME=$(strip $(shell uname -s))
+@@ -35,8 +35,8 @@
+ MakeDir=mkdir -p
+ 
+ ## Python
+-PYTHON_VERSION ?= $(shell python -c "import distutils.sysconfig;print distutils.sysconfig.get_python_version()")
+-PYTHON_INCLUDE_PREFIX ?= $(shell python -c "import distutils.sysconfig;print distutils.sysconfig.get_python_inc()")
++PYTHON_VERSION ?= $(shell python -c "import distutils.sysconfig;print(distutils.sysconfig.get_python_version())")
++PYTHON_INCLUDE_PREFIX ?= $(shell python -c "import distutils.sysconfig;print(distutils.sysconfig.get_python_inc())")
+ 
+ ifndef DEBUG
+ # Compiler flags

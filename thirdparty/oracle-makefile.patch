@@ -1,6 +1,58 @@
 --- a/extern/oracle/Makefile
 +++ b/extern/oracle/Makefile
-@@ -115,14 +115,14 @@
+@@ -52,45 +52,21 @@
+ #Requires tcsh because the .setup is a csh script
+ #export SHELL=/bin/tcsh
+ 
+-TARGET= $(shell $(XDAQ_ROOT)/$(BUILD_SUPPORT)/checktarget.sh)_$(shell $(XDAQ_ROOT)/$(BUILD_SUPPORT)/checkos.sh)
++TARGET=$(XDAQ_PLATFORM)
+ 
+-ifneq (,$(findstring x86_slc4,$(TARGET)))
+-FILE1=instantclient-basic-linux-12.1.0.1.0.zip
+-FILE2=instantclient-sdk-linux-12.1.0.1.0.zip
+-FILE3=instantclient-sqlplus-linux-12.1.0.1.0.zip
+-else
+-ifneq (,$(findstring x86_slc5,$(TARGET)))
+-FILE1=instantclient-basic-linux-12.1.0.1.0.zip
+-FILE2=instantclient-sdk-linux-12.1.0.1.0.zip
+-FILE3=instantclient-sqlplus-linux-12.1.0.1.0.zip
+-else
+-ifneq (,$(findstring x86_slc6,$(TARGET)))
+-FILE1=instantclient-basic-linux-12.1.0.1.0.zip
+-FILE2=instantclient-sdk-linux-12.1.0.1.0.zip
+-FILE3=instantclient-sqlplus-linux-12.1.0.1.0.zip
+-else
+-ifneq (,$(findstring x86_64_slc5,$(TARGET)))
+-FILE1=instantclient-basic-linux.x64-12.1.0.1.0.zip
+-FILE2=instantclient-sdk-linux.x64-12.1.0.1.0.zip
+-FILE3=instantclient-sqlplus-linux.x64-12.1.0.1.0.zip
+-else
+-ifneq (,$(findstring x86_64_slc6,$(TARGET)))
++ifneq (,$(findstring x86_64,$(TARGET)))
+ FILE1=instantclient-basic-linux.x64-12.1.0.1.0.zip
+ FILE2=instantclient-sdk-linux.x64-12.1.0.1.0.zip
+ FILE3=instantclient-sqlplus-linux.x64-12.1.0.1.0.zip
+ else
+-ifneq (,$(findstring x86_64_centos7,$(TARGET)))
+-FILE1=instantclient-basic-linux.x64-12.1.0.1.0.zip
+-FILE2=instantclient-sdk-linux.x64-12.1.0.1.0.zip
+-FILE3=instantclient-sqlplus-linux.x64-12.1.0.1.0.zip
++ifneq (,$(findstring x86,$(TARGET)))
++FILE1=instantclient-basic-linux-12.1.0.1.0.zip
++FILE2=instantclient-sdk-linux-12.1.0.1.0.zip
++FILE3=instantclient-sqlplus-linux-12.1.0.1.0.zip
+ else
+ $(shell echo ERROR: Unsupported target architecture: ${TARGET} 1>&2)
+ endif
+ endif
+-endif
+-endif
+-endif
+-endif
+ 
+ _all: all
+ 
+@@ -115,14 +91,14 @@
  	-unzip -qo $(FILE1);
  	-unzip -qo $(FILE2);
  	-unzip -qo $(FILE3);

@@ -30,6 +30,10 @@ option(PC_BUILD
   ON
 )
 
+# xDAQ environment variables
+string(TOLOWER "${CMAKE_SYSTEM_NAME}" XDAQ_OS)
+string(TOLOWER "${CMAKE_SYSTEM_PROCESSOR}" XDAQ_PLATFORM)
+
 if(CTP7_BUILD)
   # Minimal check for the Xilinx SDK
   find_program(Xilinx-SDK

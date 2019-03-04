@@ -15,6 +15,8 @@ make
 
 ## Options
 
+**WARNING !** Since the development is a work in progress, the `BUILD_XDAQ=ON` option is currently mandatory.
+
 * `CTP7_BUILD` : Build the software for the CTP7 (default: ON)
   * `CTP7_SYSROOT` : Sysroot of the CTP7 (required when `ARM_BUILD=ON`)
 * `GLIB_BUILD` : Build the software for the GLIB (default: OFF)

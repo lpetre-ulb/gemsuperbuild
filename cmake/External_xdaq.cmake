@@ -8,6 +8,7 @@ ExternalProject_Add(xdaq-core
 
   PATCH_COMMAND patch -p1 -i "${CMAKE_SOURCE_DIR}/thirdparty/xalan-makefile.patch"
   COMMAND       patch -p1 -i "${CMAKE_SOURCE_DIR}/thirdparty/xdaq-core-cpp11.patch"
+  COMMAND       patch -p1 -i "${CMAKE_SOURCE_DIR}/thirdparty/xdaq-core-asyncresolv.patch"
 
   CONFIGURE_COMMAND ""
   BUILD_IN_SOURCE TRUE

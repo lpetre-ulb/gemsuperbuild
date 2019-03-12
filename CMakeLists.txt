@@ -7,11 +7,8 @@ include(PreventInSourceBuilds)
 project(gemsuperbuild
   LANGUAGES NONE)
 
-# This project is a superbuild...
-include(ExternalProject)
-
-# Provide the cache
-include(GEMSuperbuildCache)
+include(SuperbuildCache)
+include(SuperbuildProject)
 
 # GEM targets
 option(CTP7_BUILD "\
@@ -50,12 +47,12 @@ if(CTP7_BUILD)
   endif()
 
   # Build the libraries
-  include(External_log4cplus)
-  include(External_xerces-c)
-  include(External_lmdb)
+  superbuild_add_project(log4cplus GEM_TARGET CTP7)
+  superbuild_add_project(xerces-c GEM_TARGET CTP7)
+  superbuild_add_project(lmdb GEM_TARGET CTP7)
 
   # Build the software
-  include(External_reg_utils_arm)
+  superbuild_add_project(reg_utils GEM_TARGET CTP7)
 endif(CTP7_BUILD)
 
 if(GLIB_BUILD)
@@ -67,12 +64,13 @@ if(PC_BUILD)
   OFF)
 
   if(BUILD_XDAQ)
-    include(External_xdaq)
+    superbuild_add_project(xdaq GEM_TARGET PC)
   endif()
 
-  include(External_wiscrpcsvc)
-  include(External_reg_utils_x86_64)
-  include(External_xhal_x86_64)
-  include(External_cactus)
+  superbuild_add_project(wiscrpcsvc-client GEM_TARGET PC)
+  superbuild_add_project(reg_utils GEM_TARGET PC)
+  superbuild_add_project(xhal GEM_TARGET PC)
+  superbuild_add_project(ipbus-sw GEM_TARGET PC)
+  superbuild_add_project(amc13-sw GEM_TARGET PC)
 endif(PC_BUILD)
 

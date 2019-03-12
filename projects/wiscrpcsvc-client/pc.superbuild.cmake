@@ -1,5 +1,5 @@
-ExternalProject_Add(wiscrpcsvc
-  PREFIX "${CMAKE_CURRENT_BINARY_DIR}/thirdparty/wiscrpcsvc"
+ExternalProject_Add(${EP_NAME}
+  PREFIX "${EP_PREFIX}"
   INSTALL_DIR "${CMAKE_BINARY_DIR}/install/x86_64"
 
   DOWNLOAD_DIR "${GEM_SUPERBUILD_CACHE_DIR}"

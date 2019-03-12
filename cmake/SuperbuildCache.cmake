@@ -1,7 +1,7 @@
 # This module defines the cache path variable and populates it with
-# archives found in ${CMAKE_SOURCE_DIR}/thirdparty
+# archives found in the ${CMAKE_SOURCE_DIR}/third_party directory
 
-function(gem_set_cache_dir)
+function(_superbuild_set_cache_dir)
   if(NOT DEFINED GEM_SUPERBUILD_CACHE_DIR)
     set(GEM_SUPERBUILD_CACHE_DIR "${CMAKE_BINARY_DIR}/cache")
   endif()
@@ -12,10 +12,10 @@ function(gem_set_cache_dir)
 Define this path to a location outside of your build directory to avoid re-downloading archives.")
 endfunction()
 
-function(gem_populate_cache)
+function(_superbuild_populate_cache)
   file(GLOB ARCHIVE_FILES
-    "${CMAKE_SOURCE_DIR}/thirdparty/*.tar*"
-    "${CMAKE_SOURCE_DIR}/thirdparty/*.zip"
+    "${CMAKE_SOURCE_DIR}/third_party/*.tar*"
+    "${CMAKE_SOURCE_DIR}/third_party/*.zip"
   )
   
   foreach(ARCHIVE_FILE ${ARCHIVE_FILES})
@@ -31,6 +31,6 @@ function(gem_populate_cache)
   endforeach()
 endfunction()
 
-gem_set_cache_dir()
-gem_populate_cache()
+_superbuild_set_cache_dir()
+_superbuild_populate_cache()
 

@@ -1,12 +1,12 @@
-ExternalProject_Add(log4cplus
-  PREFIX "${CMAKE_CURRENT_BINARY_DIR}/thirdparty/log4cplus"
+ExternalProject_Add(${EP_NAME}
+  PREFIX "${EP_PREFIX}"
   INSTALL_DIR "${CMAKE_BINARY_DIR}/install/arm"
 
   DOWNLOAD_DIR "${GEM_SUPERBUILD_CACHE_DIR}"
-  URL "https://netix.dl.sourceforge.net/project/log4cplus/log4cplus-stable/1.1.2/log4cplus-1.1.2.tar.xz"
-  URL_HASH SHA256=999427580cded403b4edc8a85088621f27493c489f08b9f564fb5fe76c16a883
+  URL "http://archive.apache.org/dist/xerces/c/3/sources/xerces-c-3.1.4.tar.xz"
+  URL_HASH SHA256=9973cc79481803f8b6652c52faf5195d963f50d209d4f681ec97e2aa014b6241
 
-  CONFIGURE_COMMAND "<SOURCE_DIR>/configure" --prefix=/usr --disable-threads
+  CONFIGURE_COMMAND "<SOURCE_DIR>/configure" --prefix=/usr
     --host=arm-linux 
     "--with-sysroot=${CTP7_SYSROOT}"
     "CC=arm-linux-gnueabihf-gcc"

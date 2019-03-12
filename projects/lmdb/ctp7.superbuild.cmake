@@ -1,5 +1,5 @@
-ExternalProject_Add(lmdb
-  PREFIX "${CMAKE_CURRENT_BINARY_DIR}/thirdparty/lmdb"
+ExternalProject_Add(${EP_NAME}
+  PREFIX "${EP_PREFIX}"
   INSTALL_DIR "${CMAKE_BINARY_DIR}/install/arm"
 
   DOWNLOAD_DIR "${GEM_SUPERBUILD_CACHE_DIR}"

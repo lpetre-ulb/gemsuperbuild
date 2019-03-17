@@ -1,8 +1,10 @@
 ExternalProject_Add(${EP_NAME}
   PREFIX "${EP_PREFIX}"
-  INSTALL_DIR "${CMAKE_BINARY_DIR}/install/arm"
+  INSTALL_DIR "${EP_INSTALL_DIR}"
 
   SOURCE_DIR "${CMAKE_SOURCE_DIR}/reg_utils"
+  BUILD_ALWAYS TRUE 
+
   CMAKE_ARGS
     "-DCMAKE_TOOLCHAIN_FILE=<SOURCE_DIR>/cmake/Toolchain_Peta.cmake"
     "-DPETA_SYSROOT=${PETA_SYSROOT}"

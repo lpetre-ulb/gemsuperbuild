@@ -1,6 +1,17 @@
+add_custom_target(${EP_NAME})
+add_dependencies(${EP_NAME} core.${EP_NAME} worksuite.${EP_NAME})
+
+# xDAQ worksuite packages to be build
+# Other packages have not been tested and may or may not compile
+set(WORKSUITE_PACKAGES
+  "xdaq2rc \
+   extern/oracle \
+   tstore/utils tstore/client tstore tstore/api"
+)
+
 ExternalProject_Add(core.${EP_NAME}
-  PREFIX "${EP_PREFIX}/core"
-  INSTALL_DIR "${CMAKE_BINARY_DIR}/install/xdaq"
+  PREFIX "${EP_PREFIX}"
+  INSTALL_DIR "${EP_INSTALL_DIR}/opt/xdaq"
 
   DOWNLOAD_DIR "${GEM_SUPERBUILD_CACHE_DIR}"
   URL https://gitlab.cern.ch/cmsos/core/-/archive/release_14_10_0_0/core-release_14_10_0_0.tar.bz2
@@ -13,26 +24,20 @@ ExternalProject_Add(core.${EP_NAME}
   CONFIGURE_COMMAND ""
   BUILD_IN_SOURCE TRUE
   BUILD_COMMAND make
-    "XDAQ_ROOT=<SOURCE_DIR>" "XDAQ_OS=${XDAQ_OS}" "XDAQ_PLATFORM=${XDAQ_PLATFORM}"
+    "XDAQ_OS=${XDAQ_OS}" "XDAQ_PLATFORM=${XDAQ_PLATFORM}"
     PROJECT_NAME=core
+    "XDAQ_ROOT=<SOURCE_DIR>"
     "INSTALL_PREFIX=<INSTALL_DIR>"
   INSTALL_COMMAND make install
-    "XDAQ_ROOT=<SOURCE_DIR>" "XDAQ_OS=${XDAQ_OS}" "XDAQ_PLATFORM=${XDAQ_PLATFORM}"
+    "XDAQ_OS=${XDAQ_OS}" "XDAQ_PLATFORM=${XDAQ_PLATFORM}"
     PROJECT_NAME=core
+    "XDAQ_ROOT=<SOURCE_DIR>"
     "INSTALL_PREFIX=<INSTALL_DIR>"
-)
-
-# xDAQ worksuite packages to be build
-# Other packages have not been tested and might not compile
-set(WORKSUITE_PACKAGES
-  "xdaq2rc \
-   extern/oracle \
-   tstore/utils tstore/client tstore tstore/api"
 )
 
 ExternalProject_Add(worksuite.${EP_NAME}
-  PREFIX "${EP_PREFIX}/worksuite"
-  INSTALL_DIR "${CMAKE_BINARY_DIR}/install/xdaq"
+  PREFIX "${EP_PREFIX}"
+  INSTALL_DIR "${EP_INSTALL_DIR}/opt/xdaq"
 
   DOWNLOAD_DIR "${GEM_SUPERBUILD_CACHE_DIR}"
   URL https://gitlab.cern.ch/cmsos/worksuite/-/archive/release_14_9_0_0/worksuite-release_14_9_0_0.tar.bz2
@@ -40,22 +45,24 @@ ExternalProject_Add(worksuite.${EP_NAME}
 
   PATCH_COMMAND patch -p1 -i "${CMAKE_CURRENT_LIST_DIR}/oracle-makefile.patch"
   COMMAND       patch -p1 -i "${CMAKE_CURRENT_LIST_DIR}/xdaq-worksuite-cpp11.patch"
-  COMMAND       sed "s/BUILD_HOME/XDAQ_ROOT/g" "${EP_PREFIX}/core/src/core.xdaq.pc/mfDefs.core" > "<SOURCE_DIR>/mfDefs.core"
+  COMMAND       sed "s/BUILD_HOME/XDAQ_ROOT/g" "${EP_PREFIX}/src/core.xdaq.pc/mfDefs.core" > "<SOURCE_DIR>/mfDefs.core"
   COMMAND       echo "include <SOURCE_DIR>/mfDefs.core" >> "<SOURCE_DIR>/mfDefs.worksuite"
 
   CONFIGURE_COMMAND ""
   BUILD_IN_SOURCE TRUE
   BUILD_COMMAND make
-    "XDAQ_ROOT=${EP_PREFIX}/core/src/core.xdaq.pc" "XDAQ_OS=${XDAQ_OS}" "XDAQ_PLATFORM=${XDAQ_PLATFORM}"
+    "XDAQ_OS=${XDAQ_OS}" "XDAQ_PLATFORM=${XDAQ_PLATFORM}"
     PROJECT_NAME=worksuite
     "PACKAGES=${WORKSUITE_PACKAGES}"
+    "XDAQ_ROOT=${EP_PREFIX}/src/core.xdaq.pc"
     "INSTALL_PREFIX=<INSTALL_DIR>"
   INSTALL_COMMAND make install
-    "XDAQ_ROOT=${EP_PREFIX}/core/src/core.xdaq.pc" "XDAQ_OS=${XDAQ_OS}" "XDAQ_PLATFORM=${XDAQ_PLATFORM}"
+    "XDAQ_OS=${XDAQ_OS}" "XDAQ_PLATFORM=${XDAQ_PLATFORM}"
     PROJECT_NAME=worksuite
     "PACKAGES=${WORKSUITE_PACKAGES}"
+    "XDAQ_ROOT=${EP_PREFIX}/src/core.xdaq.pc"
     "INSTALL_PREFIX=<INSTALL_DIR>"
 
-  DEPENDS core.xdaq.pc
+  DEPENDS core.${EP_NAME}
 )
 

@@ -1,4 +1,5 @@
-# Ignore the cache and build directories
+# Ignore the cache, build and install directories
 cache/
 build/
+install/
 

@@ -6,10 +6,10 @@ ExternalProject_Add(${EP_NAME}
   BUILD_ALWAYS TRUE
   CMAKE_ARGS
     "-DCMAKE_INSTALL_PREFIX=/usr"
-    "-DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/install/xdaq/${XDAQ_PLATFORM}"
+    "-DCMAKE_PREFIX_PATH=${EP_INSTALL_DIR}/opt/xdaq/${XDAQ_PLATFORM}"
     "-DCMAKE_FIND_ROOT_PATH=${CMAKE_BINARY_DIR}/install/x86_64"
   INSTALL_COMMAND make install "DESTDIR=<INSTALL_DIR>"
 
-  DEPENDS wiscrpcsvc-client.pc core.xdaq.pc
+  DEPENDS wiscrpcsvc-client.pc xdaq.pc
 )
 

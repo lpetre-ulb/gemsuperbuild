@@ -22,6 +22,6 @@ make
 
 ### Advanced
 
-* `GEM_SUPERBUILD_CACHE_DIR` : Defines the cache path for the archives. If you frequently delete your build directory, this avoid re-downloading the archives.
+* `SUPERBUILD_CACHE_DIR` : Defines the cache path for the archives. If you frequently delete your build directory, this avoid re-downloading the archives.
 * `EXPERIMENTAL_BUILD` : Build experimental projects which could fail the build (e.g. cmsgemos) (default: OFF)
 

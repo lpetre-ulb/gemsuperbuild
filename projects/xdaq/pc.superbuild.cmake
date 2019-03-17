@@ -22,7 +22,7 @@ ExternalProject_Add(core.${EP_NAME}
   PREFIX "${EP_PREFIX}"
   INSTALL_DIR "${EP_INSTALL_DIR}"
 
-  DOWNLOAD_DIR "${GEM_SUPERBUILD_CACHE_DIR}"
+  DOWNLOAD_DIR "${SUPERBUILD_CACHE_DIR}"
   URL https://gitlab.cern.ch/cmsos/core/-/archive/release_14_10_0_0/core-release_14_10_0_0.tar.bz2
   URL_HASH SHA256=2cb223ded3db28f67443f38dc7b40a432667643fc3f96983402b7f4c3cdafcfa
 
@@ -48,7 +48,7 @@ ExternalProject_Add(worksuite.${EP_NAME}
   PREFIX "${EP_PREFIX}"
   INSTALL_DIR "${EP_INSTALL_DIR}"
 
-  DOWNLOAD_DIR "${GEM_SUPERBUILD_CACHE_DIR}"
+  DOWNLOAD_DIR "${SUPERBUILD_CACHE_DIR}"
   URL https://gitlab.cern.ch/cmsos/worksuite/-/archive/release_14_9_0_0/worksuite-release_14_9_0_0.tar.bz2
   URL_HASH SHA256=2a40740227e414f45be0c36c70ce5d590756e2e9156327730ad74bfb6094a0de
 

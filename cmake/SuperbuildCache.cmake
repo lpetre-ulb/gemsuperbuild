@@ -2,12 +2,12 @@
 # archives found in the ${CMAKE_SOURCE_DIR}/third_party directory
 
 function(_superbuild_set_cache_dir)
-  if(NOT DEFINED GEM_SUPERBUILD_CACHE_DIR)
-    set(GEM_SUPERBUILD_CACHE_DIR "${CMAKE_BINARY_DIR}/cache")
+  if(NOT DEFINED SUPERBUILD_CACHE_DIR)
+    set(SUPERBUILD_CACHE_DIR "${CMAKE_BINARY_DIR}/cache")
   endif()
   
-  set(GEM_SUPERBUILD_CACHE_DIR
-    "${GEM_SUPERBUILD_CACHE_DIR}" CACHE PATH
+  set(SUPERBUILD_CACHE_DIR
+    "${SUPERBUILD_CACHE_DIR}" CACHE PATH
     "Path where the cached archives will be stored. 
 Define this path to a location outside of your build directory to avoid re-downloading archives.")
 endfunction()
@@ -21,11 +21,11 @@ function(_superbuild_populate_cache)
   foreach(ARCHIVE_FILE ${ARCHIVE_FILES})
     get_filename_component(ARCHIVE_FILENAME "${ARCHIVE_FILE}" NAME)
 
-    if(NOT EXISTS "${GEM_SUPERBUILD_CACHE_DIR}/${ARCHIVE_FILENAME}")
+    if(NOT EXISTS "${SUPERBUILD_CACHE_DIR}/${ARCHIVE_FILENAME}")
       message("Copying ${ARCHIVE_FILENAME} to the cache.")
 
       file(COPY "${ARCHIVE_FILE}"
-        DESTINATION "${GEM_SUPERBUILD_CACHE_DIR}")
+        DESTINATION "${SUPERBUILD_CACHE_DIR}")
     endif()
 
   endforeach()

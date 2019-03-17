@@ -2,7 +2,7 @@ ExternalProject_Add(${EP_NAME}
   PREFIX "${EP_PREFIX}"
   INSTALL_DIR "${EP_INSTALL_DIR}"
 
-  DOWNLOAD_DIR "${GEM_SUPERBUILD_CACHE_DIR}"
+  DOWNLOAD_DIR "${SUPERBUILD_CACHE_DIR}"
   URL "http://archive.apache.org/dist/xerces/c/3/sources/xerces-c-3.1.4.tar.xz"
   URL_HASH SHA256=9973cc79481803f8b6652c52faf5195d963f50d209d4f681ec97e2aa014b6241
 

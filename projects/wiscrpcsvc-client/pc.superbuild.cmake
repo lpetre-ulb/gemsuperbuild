@@ -1,6 +1,6 @@
 ExternalProject_Add(${EP_NAME}
   PREFIX "${EP_PREFIX}"
-  INSTALL_DIR "${CMAKE_BINARY_DIR}/install/x86_64"
+  INSTALL_DIR "${EP_INSTALL_DIR}"
 
   DOWNLOAD_DIR "${GEM_SUPERBUILD_CACHE_DIR}"
   URL "https://github.com/cms-gem-daq-project/rpcsvc/archive/f75364532253c93dbadece18b8be0fac7140236d.zip"

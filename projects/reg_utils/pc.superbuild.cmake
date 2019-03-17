@@ -1,13 +1,17 @@
+superbuild_add_dependencies(wiscrpcsvc-client)
+
 ExternalProject_Add(${EP_NAME}
   PREFIX "${EP_PREFIX}"
-  INSTALL_DIR "${CMAKE_BINARY_DIR}/install/x86_64"
+  INSTALL_DIR "${EP_INSTALL_DIR}"
 
   SOURCE_DIR "${CMAKE_SOURCE_DIR}/reg_utils"
   BUILD_ALWAYS TRUE
+
   CMAKE_ARGS
-    "-DCMAKE_INSTALL_PREFIX=/usr"
-    "-DCMAKE_FIND_ROOT_PATH=${CMAKE_BINARY_DIR}/install/x86_64"
-  INSTALL_COMMAND make install "DESTDIR=<INSTALL_DIR>"
-  DEPENDS wiscrpcsvc-client.pc
+    "-DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>/usr"
+    "-DCMAKE_FIND_ROOT_PATH=<INSTALL_DIR>"
+  INSTALL_COMMAND make install
+
+  DEPENDS ${EP_DEPENDENCIES}
 )
 

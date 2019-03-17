@@ -16,11 +16,12 @@ make
 ## Options
 
 * `CTP7_BUILD` : Build the software for the CTP7 (default: ON)
-  * `CTP7_SYSROOT` : Sysroot of the CTP7 (required when `ARM_BUILD=ON`)
+  * `CTP7_SYSROOT` : Sysroot of the CTP7 (required when `CTP7_BUILD=ON`)
 * `GLIB_BUILD` : Build the software for the GLIB (default: OFF)
 * `PC_BUILD` : Build the software for the DAQ machine (default : ON)
 
 ### Advanced
 
 * `GEM_SUPERBUILD_CACHE_DIR` : Defines the cache path for the archives. If you frequently delete your build directory, this avoid re-downloading the archives.
+* `EXPERIMENTAL_BUILD` : Build experimental projects which could fail the build (e.g. cmsgemos) (default: OFF)
 

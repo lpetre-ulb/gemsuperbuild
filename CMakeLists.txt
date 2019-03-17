@@ -36,6 +36,11 @@ option(PC_BUILD
   ON
 )
 
+option(EXPERIMENTAL_BUILD
+  "Build experimental projects which could fail the build."
+  OFF
+)
+
 if(CTP7_BUILD)
   set(SUPERBUILD_TARGET CTP7)
   # Minimal check for the Xilinx SDK
@@ -72,5 +77,9 @@ if(PC_BUILD)
   superbuild_add_project(xhal)
   superbuild_add_project(ipbus-sw)
   superbuild_add_project(amc13-sw)
+
+  if(EXPERIMENTAL_BUILD)
+    superbuild_add_project(cmsgemos)
+  endif()
 endif(PC_BUILD)
 

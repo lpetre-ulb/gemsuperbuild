@@ -4,3 +4,6 @@
 [submodule "xhal"]
 	path = xhal
 	url = https://github.com/lpetre-ulb/xhal.git
+[submodule "cmsgemos"]
+	path = cmsgemos
+	url = https://github.com/lmoureaux/cmsgemos.git

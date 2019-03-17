@@ -32,6 +32,7 @@ string(TOLOWER "${CMAKE_SYSTEM_NAME}" XDAQ_OS)
 string(TOLOWER "${CMAKE_SYSTEM_PROCESSOR}" XDAQ_PLATFORM)
 
 if(CTP7_BUILD)
+  set(SUPERBUILD_TARGET CTP7)
   # Minimal check for the Xilinx SDK
   find_program(Xilinx-SDK
     arm-linux-gnueabihf-gcc
@@ -47,30 +48,32 @@ if(CTP7_BUILD)
   endif()
 
   # Build the libraries
-  superbuild_add_project(log4cplus GEM_TARGET CTP7)
-  superbuild_add_project(xerces-c GEM_TARGET CTP7)
-  superbuild_add_project(lmdb GEM_TARGET CTP7)
+  superbuild_add_project(log4cplus)
+  superbuild_add_project(xerces-c)
+  superbuild_add_project(lmdb)
 
   # Build the software
-  superbuild_add_project(reg_utils GEM_TARGET CTP7)
+  superbuild_add_project(reg_utils)
 endif(CTP7_BUILD)
 
 if(GLIB_BUILD)
+  set(SUPERBUILD_TARGET GLIB)
 endif(GLIB_BUILD)
 
 if(PC_BUILD)
+  set(SUPERBUILD_TARGET PC)
+
   option(BUILD_XDAQ 
     "Build XDAQ from sources."
   OFF)
 
   if(BUILD_XDAQ)
-    superbuild_add_project(xdaq GEM_TARGET PC)
+    superbuild_add_project(xdaq)
   endif()
 
-  superbuild_add_project(wiscrpcsvc-client GEM_TARGET PC)
-  superbuild_add_project(reg_utils GEM_TARGET PC)
-  superbuild_add_project(xhal GEM_TARGET PC)
-  superbuild_add_project(ipbus-sw GEM_TARGET PC)
-  superbuild_add_project(amc13-sw GEM_TARGET PC)
+  superbuild_add_project(reg_utils)
+  superbuild_add_project(xhal)
+  superbuild_add_project(ipbus-sw)
+  superbuild_add_project(amc13-sw)
 endif(PC_BUILD)
 

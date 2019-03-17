@@ -1,6 +1,6 @@
 ExternalProject_Add(${EP_NAME}
   PREFIX "${EP_PREFIX}"
-  INSTALL_DIR "${CMAKE_BINARY_DIR}/install/cactus"
+  INSTALL_DIR "${EP_INSTALL_DIR}"
 
   DOWNLOAD_DIR "${GEM_SUPERBUILD_CACHE_DIR}"
   URL "https://github.com/ipbus/ipbus-software/archive/v2.6.3.tar.gz"
@@ -11,9 +11,9 @@ ExternalProject_Add(${EP_NAME}
   BUILD_IN_SOURCE TRUE
   BUILD_COMMAND $(MAKE)
     Set=uhal
-    "prefix=<INSTALL_DIR>"
+    "prefix=<INSTALL_DIR>/opt/cactus"
   INSTALL_COMMAND $(MAKE) install
     Set=uhal
-    "prefix=<INSTALL_DIR>"
+    "prefix=<INSTALL_DIR>/opt/cactus"
 )
 

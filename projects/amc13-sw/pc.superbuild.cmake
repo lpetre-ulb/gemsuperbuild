@@ -1,6 +1,8 @@
+superbuild_add_dependencies(ipbus-sw)
+
 ExternalProject_Add(${EP_NAME}
   PREFIX "${EP_PREFIX}"
-  INSTALL_DIR "${CMAKE_BINARY_DIR}/install/cactus"
+  INSTALL_DIR "${EP_INSTALL_DIR}"
 
   # FIXME : This target still does not use the cache because the zip is corrupted...
   #URL "https://svnweb.cern.ch/trac/cactus/browser/tags/amc13/amc13_v1_2_13?rev=50949&format=zip"
@@ -14,13 +16,14 @@ ExternalProject_Add(${EP_NAME}
   CONFIGURE_COMMAND ""
   BUILD_IN_SOURCE TRUE
   BUILD_COMMAND make
-    "CACTUS_ROOT=${CMAKE_BINARY_DIR}/install/cactus"
-    "INSTALL_PREFIX=<INSTALL_DIR>"
     "SHELL=bash"
+    "CACTUS_ROOT=<INSTALL_DIR>/opt/cactus"
+    "INSTALL_PREFIX=<INSTALL_DIR>/opt/cactus"
   INSTALL_COMMAND make install
-    "CACTUS_ROOT=${CMAKE_BINARY_DIR}/install/cactus"
-    "INSTALL_PREFIX=<INSTALL_DIR>"
+    "SHELL=bash"
+    "CACTUS_ROOT=<INSTALL_DIR>/opt/cactus"
+    "INSTALL_PREFIX=<INSTALL_DIR>/opt/cactus"
 
-  DEPENDS ipbus-sw.pc
+  DEPENDS ${EP_DEPENDENCIES}
 )
 

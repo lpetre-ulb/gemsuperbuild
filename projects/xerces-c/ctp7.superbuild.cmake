@@ -1,6 +1,6 @@
 ExternalProject_Add(${EP_NAME}
   PREFIX "${EP_PREFIX}"
-  INSTALL_DIR "${CMAKE_BINARY_DIR}/install/arm"
+  INSTALL_DIR "${EP_INSTALL_DIR}"
 
   DOWNLOAD_DIR "${GEM_SUPERBUILD_CACHE_DIR}"
   URL "http://archive.apache.org/dist/xerces/c/3/sources/xerces-c-3.1.4.tar.xz"

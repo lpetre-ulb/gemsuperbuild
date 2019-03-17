@@ -72,14 +72,6 @@ endif(GLIB_BUILD)
 if(PC_BUILD)
   set(SUPERBUILD_TARGET PC)
 
-  option(BUILD_XDAQ 
-    "Build XDAQ from sources."
-  OFF)
-
-  if(BUILD_XDAQ)
-    superbuild_add_project(xdaq)
-  endif()
-
   superbuild_add_project(reg_utils)
   superbuild_add_project(xhal)
   superbuild_add_project(ipbus-sw)

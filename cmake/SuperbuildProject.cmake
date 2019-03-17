@@ -14,6 +14,7 @@ function(superbuild_add_project _project_name)
   # Available variables for the EP
   set(EP_NAME "${_project_name}.${_gem_target}")
   set(EP_PREFIX "${CMAKE_BINARY_DIR}/${EP_NAME}")
+  set(EP_INSTALL_DIR "${SUPERBUILD_INSTALL_DIR}/${_gem_target}")
   set(EP_DEPENDENCIES "")
 
   # Return EP_NAME if requested

@@ -10,6 +10,15 @@ project(gemsuperbuild
 include(SuperbuildCache)
 include(SuperbuildProject)
 
+# Installation prefix
+if(NOT DEFINED SUPERBUILD_INSTALL_DIR)
+  set(SUPERBUILD_INSTALL_DIR "${CMAKE_SOURCE_DIR}/install")
+endif()
+
+set(SUPERBUILD_INSTALL_DIR
+  "${SUPERBUILD_INSTALL_DIR}" CACHE PATH
+  "Path where the software will be installed for the developer.")
+
 # GEM targets
 option(CTP7_BUILD "\
 Build the software running on the CTP7 (ARM architecture). \

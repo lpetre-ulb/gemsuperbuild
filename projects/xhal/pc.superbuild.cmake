@@ -1,15 +1,18 @@
+superbuild_add_dependencies(wiscrpcsvc-client xdaq)
+
 ExternalProject_Add(${EP_NAME}
   PREFIX "${EP_PREFIX}"
-  INSTALL_DIR "${CMAKE_BINARY_DIR}/install/x86_64"
+  INSTALL_DIR "${EP_INSTALL_DIR}"
 
   SOURCE_DIR "${CMAKE_SOURCE_DIR}/xhal"
   BUILD_ALWAYS TRUE
-  CMAKE_ARGS
-    "-DCMAKE_INSTALL_PREFIX=/usr"
-    "-DCMAKE_PREFIX_PATH=${EP_INSTALL_DIR}/opt/xdaq/${XDAQ_PLATFORM}"
-    "-DCMAKE_FIND_ROOT_PATH=${CMAKE_BINARY_DIR}/install/x86_64"
-  INSTALL_COMMAND make install "DESTDIR=<INSTALL_DIR>"
 
-  DEPENDS wiscrpcsvc-client.pc xdaq.pc
+  CMAKE_ARGS
+    "-DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>/usr"
+    "-DCMAKE_FIND_ROOT_PATH=<INSTALL_DIR>$<SEMICOLON>${CMAKE_BINARY_DIR}/install/x86_64"
+    "-DCMAKE_PREFIX_PATH=/opt/xdaq/${XDAQ_PLATFORM}"
+  INSTALL_COMMAND make install
+
+  DEPENDS ${EP_DEPENDENCIES}
 )
 

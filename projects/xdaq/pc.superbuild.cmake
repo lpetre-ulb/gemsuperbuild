@@ -1,5 +1,14 @@
+# xDAQ is complex and is split in 2 external projects
 add_custom_target(${EP_NAME})
 add_dependencies(${EP_NAME} core.${EP_NAME} worksuite.${EP_NAME})
+
+# Define the xDAQ environment variables
+# Projects requiring xDAQ will also have access to these variables
+string(TOLOWER "${CMAKE_SYSTEM_NAME}" _xdaq_os)
+string(TOLOWER "${CMAKE_SYSTEM_PROCESSOR}" _xdaq_platform)
+
+set(XDAQ_OS "${_xdaq_os}" CACHE INTERNAL "")
+set(XDAQ_PLATFORM "${_xdaq_platform}" CACHE INTERNAL "")
 
 # xDAQ worksuite packages to be build
 # Other packages have not been tested and may or may not compile
@@ -11,7 +20,7 @@ set(WORKSUITE_PACKAGES
 
 ExternalProject_Add(core.${EP_NAME}
   PREFIX "${EP_PREFIX}"
-  INSTALL_DIR "${EP_INSTALL_DIR}/opt/xdaq"
+  INSTALL_DIR "${EP_INSTALL_DIR}"
 
   DOWNLOAD_DIR "${GEM_SUPERBUILD_CACHE_DIR}"
   URL https://gitlab.cern.ch/cmsos/core/-/archive/release_14_10_0_0/core-release_14_10_0_0.tar.bz2
@@ -27,17 +36,17 @@ ExternalProject_Add(core.${EP_NAME}
     "XDAQ_OS=${XDAQ_OS}" "XDAQ_PLATFORM=${XDAQ_PLATFORM}"
     PROJECT_NAME=core
     "XDAQ_ROOT=<SOURCE_DIR>"
-    "INSTALL_PREFIX=<INSTALL_DIR>"
+    "INSTALL_PREFIX=<INSTALL_DIR>/opt/xdaq"
   INSTALL_COMMAND make install
     "XDAQ_OS=${XDAQ_OS}" "XDAQ_PLATFORM=${XDAQ_PLATFORM}"
     PROJECT_NAME=core
     "XDAQ_ROOT=<SOURCE_DIR>"
-    "INSTALL_PREFIX=<INSTALL_DIR>"
+    "INSTALL_PREFIX=<INSTALL_DIR>/opt/xdaq"
 )
 
 ExternalProject_Add(worksuite.${EP_NAME}
   PREFIX "${EP_PREFIX}"
-  INSTALL_DIR "${EP_INSTALL_DIR}/opt/xdaq"
+  INSTALL_DIR "${EP_INSTALL_DIR}"
 
   DOWNLOAD_DIR "${GEM_SUPERBUILD_CACHE_DIR}"
   URL https://gitlab.cern.ch/cmsos/worksuite/-/archive/release_14_9_0_0/worksuite-release_14_9_0_0.tar.bz2
@@ -55,13 +64,13 @@ ExternalProject_Add(worksuite.${EP_NAME}
     PROJECT_NAME=worksuite
     "PACKAGES=${WORKSUITE_PACKAGES}"
     "XDAQ_ROOT=${EP_PREFIX}/src/core.xdaq.pc"
-    "INSTALL_PREFIX=<INSTALL_DIR>"
+    "INSTALL_PREFIX=<INSTALL_DIR>/opt/xdaq"
   INSTALL_COMMAND make install
     "XDAQ_OS=${XDAQ_OS}" "XDAQ_PLATFORM=${XDAQ_PLATFORM}"
     PROJECT_NAME=worksuite
     "PACKAGES=${WORKSUITE_PACKAGES}"
     "XDAQ_ROOT=${EP_PREFIX}/src/core.xdaq.pc"
-    "INSTALL_PREFIX=<INSTALL_DIR>"
+    "INSTALL_PREFIX=<INSTALL_DIR>/opt/xdaq"
 
   DEPENDS core.${EP_NAME}
 )

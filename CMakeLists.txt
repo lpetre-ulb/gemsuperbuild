@@ -77,6 +77,7 @@ if(PC_BUILD)
   superbuild_add_project(xhal)
   superbuild_add_project(ipbus-sw)
   superbuild_add_project(amc13-sw)
+  superbuild_add_project(protobuf)
 
   if(EXPERIMENTAL_BUILD)
     superbuild_add_project(cmsgemos)

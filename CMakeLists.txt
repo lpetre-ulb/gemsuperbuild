@@ -78,6 +78,7 @@ if(PC_BUILD)
   superbuild_add_project(ipbus-sw)
   superbuild_add_project(amc13-sw)
   superbuild_add_project(protobuf)
+  superbuild_add_project(occi-abicompat)
 
   if(EXPERIMENTAL_BUILD)
     superbuild_add_project(cmsgemos)

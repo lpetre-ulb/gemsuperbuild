@@ -7,3 +7,6 @@
 [submodule "cmsgemos"]
 	path = cmsgemos
 	url = https://github.com/lmoureaux/cmsgemos.git
+[submodule "occi-abicompat/cmake"]
+	path = occi-abicompat/cmake
+	url = git@github.com:lpetre-ulb/gembuild.git

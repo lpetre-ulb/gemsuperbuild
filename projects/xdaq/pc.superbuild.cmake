@@ -18,6 +18,14 @@ set(WORKSUITE_PACKAGES
    tstore/utils tstore/client tstore tstore/api"
 )
 
+set(_xdaq_core_options
+  "XDAQ_OS=${XDAQ_OS}" "XDAQ_PLATFORM=${XDAQ_PLATFORM}"
+  PROJECT_NAME=core
+  "XDAQ_ROOT=<SOURCE_DIR>"
+  "UserExecutableLinkFlags=-Wl,-rpath='$$ORIGIN/../lib'"
+  "INSTALL_PREFIX=<INSTALL_DIR>/opt/xdaq"
+)
+
 ExternalProject_Add(core.${EP_NAME}
   PREFIX "${EP_PREFIX}"
   INSTALL_DIR "${EP_INSTALL_DIR}"
@@ -33,15 +41,18 @@ ExternalProject_Add(core.${EP_NAME}
   CONFIGURE_COMMAND ""
   BUILD_IN_SOURCE TRUE
   BUILD_COMMAND make
-    "XDAQ_OS=${XDAQ_OS}" "XDAQ_PLATFORM=${XDAQ_PLATFORM}"
-    PROJECT_NAME=core
-    "XDAQ_ROOT=<SOURCE_DIR>"
-    "INSTALL_PREFIX=<INSTALL_DIR>/opt/xdaq"
+    ${_xdaq_core_options}
   INSTALL_COMMAND make install
-    "XDAQ_OS=${XDAQ_OS}" "XDAQ_PLATFORM=${XDAQ_PLATFORM}"
-    PROJECT_NAME=core
-    "XDAQ_ROOT=<SOURCE_DIR>"
-    "INSTALL_PREFIX=<INSTALL_DIR>/opt/xdaq"
+    ${_xdaq_core_options}
+)
+
+set(_xdaq_worksuite_options
+  "XDAQ_OS=${XDAQ_OS}" "XDAQ_PLATFORM=${XDAQ_PLATFORM}"
+  PROJECT_NAME=worksuite
+  "PACKAGES=${WORKSUITE_PACKAGES}"
+  "XDAQ_ROOT=${EP_PREFIX}/src/core.xdaq.pc"
+  "UserExecutableLinkFlags=-Wl,-rpath='$$ORIGIN/../lib'"
+  "INSTALL_PREFIX=<INSTALL_DIR>/opt/xdaq"
 )
 
 ExternalProject_Add(worksuite.${EP_NAME}
@@ -60,17 +71,9 @@ ExternalProject_Add(worksuite.${EP_NAME}
   CONFIGURE_COMMAND ""
   BUILD_IN_SOURCE TRUE
   BUILD_COMMAND make
-    "XDAQ_OS=${XDAQ_OS}" "XDAQ_PLATFORM=${XDAQ_PLATFORM}"
-    PROJECT_NAME=worksuite
-    "PACKAGES=${WORKSUITE_PACKAGES}"
-    "XDAQ_ROOT=${EP_PREFIX}/src/core.xdaq.pc"
-    "INSTALL_PREFIX=<INSTALL_DIR>/opt/xdaq"
+    ${_xdaq_worksuite_options}
   INSTALL_COMMAND make install
-    "XDAQ_OS=${XDAQ_OS}" "XDAQ_PLATFORM=${XDAQ_PLATFORM}"
-    PROJECT_NAME=worksuite
-    "PACKAGES=${WORKSUITE_PACKAGES}"
-    "XDAQ_ROOT=${EP_PREFIX}/src/core.xdaq.pc"
-    "INSTALL_PREFIX=<INSTALL_DIR>/opt/xdaq"
+    ${_xdaq_worksuite_options}
 
   DEPENDS core.${EP_NAME}
 )

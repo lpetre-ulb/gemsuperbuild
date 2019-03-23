@@ -43,7 +43,7 @@ ExternalProject_Add(core.${EP_NAME}
   BUILD_IN_SOURCE TRUE
   BUILD_COMMAND $(MAKE)
     ${_xdaq_core_options}
-    INSTALL_COMMAND $(MAKE) install
+  INSTALL_COMMAND $(MAKE) install
     ${_xdaq_core_options}
 )
 
@@ -61,19 +61,20 @@ ExternalProject_Add(worksuite.${EP_NAME}
   INSTALL_DIR "${EP_INSTALL_DIR}"
 
   DOWNLOAD_DIR "${SUPERBUILD_CACHE_DIR}"
-  URL https://gitlab.cern.ch/cmsos/worksuite/-/archive/release_14_9_0_0/worksuite-release_14_9_0_0.tar.bz2
-  URL_HASH SHA256=2a40740227e414f45be0c36c70ce5d590756e2e9156327730ad74bfb6094a0de
+  URL https://gitlab.cern.ch/cmsos/worksuite/-/archive/1b498ec569aba656054aa09516db73d2652d70a4/worksuite-1b498ec569aba656054aa09516db73d2652d70a4.tar.bz2
+  URL_HASH SHA256=658564ed2f260ed52dc82f5df1cdddbcc65507218c27c30152e452981797145a
 
-  PATCH_COMMAND patch -p1 -i "${CMAKE_CURRENT_LIST_DIR}/oracle-makefile.patch"
-  COMMAND       patch -p1 -i "${CMAKE_CURRENT_LIST_DIR}/xdaq-worksuite-cpp11.patch"
+  PATCH_COMMAND patch -p1 -i "${CMAKE_CURRENT_LIST_DIR}/worksuite-00-merge_master.patch"
+  COMMAND       patch -p1 -i "${CMAKE_CURRENT_LIST_DIR}/worksuite-01-oracle.patch"
+  COMMAND       patch -p1 -i "${CMAKE_CURRENT_LIST_DIR}/worksuite-02-parallel_build.patch"
   COMMAND       sed "s/BUILD_HOME/XDAQ_ROOT/g" "${EP_PREFIX}/src/core.xdaq.pc/mfDefs.core" > "<SOURCE_DIR>/mfDefs.core"
   COMMAND       echo "include <SOURCE_DIR>/mfDefs.core" >> "<SOURCE_DIR>/mfDefs.worksuite"
 
   CONFIGURE_COMMAND ""
   BUILD_IN_SOURCE TRUE
-  BUILD_COMMAND make
+  BUILD_COMMAND $(MAKE)
     ${_xdaq_worksuite_options}
-  INSTALL_COMMAND make install
+  INSTALL_COMMAND $(MAKE) install
     ${_xdaq_worksuite_options}
 
   DEPENDS core.${EP_NAME}

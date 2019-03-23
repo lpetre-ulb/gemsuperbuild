@@ -1,0 +1,159 @@
+diff --git a/Makefile b/Makefile
+index 09e90828b..f5712ff52 100644
+--- a/Makefile
++++ b/Makefile
+@@ -16,6 +16,9 @@
+ #
+ ##
+ 
++# Enable parallel compilation within each package
++.NOTPARALLEL:
++
+ BUILD_HOME:=$(shell pwd)
+ 
+ ifndef PACKAGES
+diff --git a/extern/caen/CAENUSBdrvB/Makefile b/extern/caen/CAENUSBdrvB/Makefile
+index d46404b4e..e3923d866 100755
+--- a/extern/caen/CAENUSBdrvB/Makefile
++++ b/extern/caen/CAENUSBdrvB/Makefile
+@@ -81,7 +81,7 @@ $(SRCDIR)/$(KMOD_BASE).c: unpack
+ 
+ $(LIBDIR)/$(KMOD_BASE): $(SRCDIR)/$(KMOD_BASE).c
+ 	mkdir -p $(LIBDIR)
+-	make -C /lib/modules/$(KERNEL_VERSION)/build M=$(SRCDIR) LDDINCDIR=$(SRCDIR)/../include modules \
++	$(MAKE) -C /lib/modules/$(KERNEL_VERSION)/build M=$(SRCDIR) LDDINCDIR=$(SRCDIR)/../include modules \
+ 	INCDIR0=$(INCDIR) modules
+ 	cp $(OBJDIR)/$(KMOD_BASE).ko $(LIBDIR)/.
+ 
+@@ -107,8 +107,8 @@ _unloadall:
+ 	/sbin/rmmod $(KMOD_BASE) 
+ 
+ reload:
+-	make unload 
+-	make load 
++	$(MAKE) unload 
++	$(MAKE) load 
+ 
+ _releaseall:
+ 
+@@ -196,7 +196,7 @@ release:
+ 	cd ../../../..; for i in $(RELEASE_FILES); do cp -v $$i  $(Project)/$(Package)/$(RELEASE_DIR)/$$i; done;  # copy release files
+ 	cd ../../../..; cp -v $(Project)/$(Package)/spec.template $(Project)/$(Package)/$(RELEASE_DIR)/$(Project)/$(Package)/$(PackageName).spec
+ 	cd ../../../..; pwd; for i in $(CONFIG_FILES); do cp -v $(CONFIG_DIR)/$$i $(Project)/$(Package)/$(RELEASE_DIR)/$$i; done;  # copy config files
+-	make -C $(RELEASE_DIR)/$(Project)/$(Package) spec_update				   # set release version in RPM
++	$(MAKE) -C $(RELEASE_DIR)/$(Project)/$(Package) spec_update				   # set release version in RPM
+ 	tar cvfz $(RELEASE_TAR) $(RELEASE_DIR)                             # make tarball
+ 	rm -rf $(RELEASE_DIR)						   # cleanup
+ 
+diff --git a/extern/caen/a2818/Makefile b/extern/caen/a2818/Makefile
+index 2b148f898..055a4ee4f 100644
+--- a/extern/caen/a2818/Makefile
++++ b/extern/caen/a2818/Makefile
+@@ -84,7 +84,7 @@ $(SRCDIR)/$(KMOD_BASE).c: unpack
+ 
+ $(LIBDIR)/$(KMOD_BASE): $(SRCDIR)/$(KMOD_BASE).c
+ 	mkdir -p $(LIBDIR)
+-	make -C /lib/modules/$(KERNEL_VERSION)/build M=$(SRCDIR) \
++	$(MAKE) -C /lib/modules/$(KERNEL_VERSION)/build M=$(SRCDIR) \
+ 	LDDINCDIR=$(INCDIR) modules
+ 	cp $(OBJDIR)/$(KMOD_BASE).ko $(LIBDIR)/.
+ 
+@@ -107,8 +107,8 @@ _unloadall:
+ 	/sbin/rmmod $(KMOD_BASE)
+ 
+ reload:
+-	make unload
+-	make load
++	$(MAKE) unload
++	$(MAKE) load
+ 
+ _releaseall:
+ 
+@@ -199,7 +199,7 @@ release:
+ 	cd ../../../..; for i in $(RELEASE_FILES); do cp -v $$i  $(Project)/$(Package)/$(RELEASE_DIR)/$$i; done;  # copy release files
+ 	cd ../../../..; cp -v $(Project)/$(Package)/spec.template $(Project)/$(Package)/$(RELEASE_DIR)/$(Project)/$(Package)/$(PackageName).spec
+ 	cd ../../../..; pwd; for i in $(CONFIG_FILES); do cp -v $(CONFIG_DIR)/$$i $(Project)/$(Package)/$(RELEASE_DIR)/$$i; done;  # copy config files
+-	make -C $(RELEASE_DIR)/$(Project)/$(Package) spec_update				   # set release version in RPM
++	$(MAKE) -C $(RELEASE_DIR)/$(Project)/$(Package) spec_update				   # set release version in RPM
+ 	tar cvfz $(RELEASE_TAR) $(RELEASE_DIR)                             # make tarball
+ 	rm -rf $(RELEASE_DIR)						   # cleanup
+ 
+diff --git a/extern/caen/a3818/Makefile b/extern/caen/a3818/Makefile
+index ab6f4b411..4a504c4b7 100755
+--- a/extern/caen/a3818/Makefile
++++ b/extern/caen/a3818/Makefile
+@@ -81,7 +81,7 @@ $(SRCDIR)/$(KMOD_BASE).c: unpack
+ 
+ $(LIBDIR)/$(KMOD_BASE): $(SRCDIR)/$(KMOD_BASE).c
+ 	mkdir -p $(LIBDIR)
+-	make -C /lib/modules/$(KERNEL_VERSION)/build M=$(SRCDIR) \
++	$(MAKE) -C /lib/modules/$(KERNEL_VERSION)/build M=$(SRCDIR) \
+ 	LDDINCDIR=$(INCDIR) modules
+ 	cp $(OBJDIR)/$(KMOD_BASE).ko $(LIBDIR)/.
+ 
+@@ -104,8 +104,8 @@ _unloadall:
+ 	/sbin/rmmod $(KMOD_BASE)
+ 
+ reload:
+-	make unload
+-	make load
++	$(MAKE) unload
++	$(MAKE) load
+ 
+ _releaseall:
+ 
+@@ -196,7 +196,7 @@ release:
+ 	cd ../../../..; for i in $(RELEASE_FILES); do cp -v $$i  $(Project)/$(Package)/$(RELEASE_DIR)/$$i; done;  # copy release files
+ 	cd ../../../..; cp -v $(Project)/$(Package)/spec.template $(Project)/$(Package)/$(RELEASE_DIR)/$(Project)/$(Package)/$(PackageName).spec
+ 	cd ../../../..; pwd; for i in $(CONFIG_FILES); do cp -v $(CONFIG_DIR)/$$i $(Project)/$(Package)/$(RELEASE_DIR)/$$i; done;  # copy config files
+-	make -C $(RELEASE_DIR)/$(Project)/$(Package) spec_update				   # set release version in RPM
++	$(MAKE) -C $(RELEASE_DIR)/$(Project)/$(Package) spec_update				   # set release version in RPM
+ 	tar cvfz $(RELEASE_TAR) $(RELEASE_DIR)                             # make tarball
+ 	rm -rf $(RELEASE_DIR)						   # cleanup
+ 
+diff --git a/extern/caen/caenupgrader/Makefile b/extern/caen/caenupgrader/Makefile
+index ac0154117..a67ddb2d1 100755
+--- a/extern/caen/caenupgrader/Makefile
++++ b/extern/caen/caenupgrader/Makefile
+@@ -71,13 +71,13 @@ $(UNPACKDIR)/configure:
+ all: $(UNPACKDIR)/configure
+ 	cd ./$(UNPACKDIR); \
+ 	./configure --prefix=$(BUILD_HOME)/$(Package)/$(XDAQ_PLATFORM) --exec-prefix=$(BUILD_HOME)/$(Package)/$(XDAQ_PLATFORM) --sysconfdir=$(BUILD_HOME)/$(Package)/$(XDAQ_PLATFORM);\
+-	make; make install
++	$(MAKE); $(MAKE) install
+ _installall: install
+ 	
+ install: $(UNPACKDIR)/configure
+ 	cd ./$(UNPACKDIR); \
+ 	./configure --prefix=$(INSTALL_PREFIX)/$(XDAQ_PLATFORM) --exec-prefix=$(INSTALL_PREFIX)/$(XDAQ_PLATFORM); \
+-	make; make install
++	$(MAKE); $(MAKE) install
+ _cleanall: clean
+ 	
+ clean:
+diff --git a/extern/dim/Makefile b/extern/dim/Makefile
+index 3dfcb51ac..ee5985708 100755
+--- a/extern/dim/Makefile
++++ b/extern/dim/Makefile
+@@ -73,7 +73,7 @@ dim/setup.sh:
+ all: dim/setup.sh
+ 	cd ./dim; \
+ 	source ./setup.sh; \
+-	make;
++	$(MAKE);
+ 	mkdir -p $(XDAQ_PLATFORM)/include/dim $(XDAQ_PLATFORM)/lib $(XDAQ_PLATFORM)/bin
+ 	install -m 655 $(BUILD_HOME)/$(Package)/dim/dim/*.{h,hxx} $(BUILD_HOME)/$(Package)/$(XDAQ_PLATFORM)/include/dim
+ 	install -m 655 $(BUILD_HOME)/$(Package)/dim/linux/*.{so,a} $(BUILD_HOME)/$(Package)/$(XDAQ_PLATFORM)/lib
+diff --git a/extern/smi/Makefile b/extern/smi/Makefile
+index 1e8ecbd51..95f47ea15 100755
+--- a/extern/smi/Makefile
++++ b/extern/smi/Makefile
+@@ -85,7 +85,7 @@ all: smixx/setup.sh
+ 	cd ./smixx; \
+ 	source ./setup.sh; \
+ 	export LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(DIMDIR)/linux:$(SMIDIR)/linux; \
+-	make FLAGS=-fPIC;
++	$(MAKE) FLAGS=-fPIC;
+ 	mkdir -p $(XDAQ_PLATFORM)/include/smixx $(XDAQ_PLATFORM)/lib $(XDAQ_PLATFORM)/bin	
+ 	install -m 655 $(BUILD_HOME)/$(Package)/smixx/smixx/*.{h,hxx} $(BUILD_HOME)/$(Package)/$(XDAQ_PLATFORM)/include/smixx
+ 	install -m 655 $(BUILD_HOME)/$(Package)/smixx/linux/*.{so,a} $(BUILD_HOME)/$(Package)/$(XDAQ_PLATFORM)/lib

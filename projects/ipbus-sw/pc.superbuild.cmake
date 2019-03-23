@@ -3,9 +3,9 @@ ExternalProject_Add(${EP_NAME}
   INSTALL_DIR "${EP_INSTALL_DIR}"
 
   DOWNLOAD_DIR "${SUPERBUILD_CACHE_DIR}"
-  URL "https://github.com/ipbus/ipbus-software/archive/v2.6.3.tar.gz"
-  DOWNLOAD_NAME ipbus-v2.6.3.tar.gz
-  URL_HASH SHA256=09fd5359cd9f750dd90495d6603f6609ef8ee34704c029f1dafcc54e15bf2b79
+  URL "https://github.com/ipbus/ipbus-software/archive/106b66b79c7bd936c23e6ad0a4a49220b530ec18.tar.gz"
+  DOWNLOAD_NAME ipbus-106b66b79c7bd936c23e6ad0a4a49220b530ec18.tar.gz
+  URL_HASH SHA256=41d9251976c59fdf35e6d08f5a17b6c4d4ccf40a883fd5957c4758e48b9e6372
 
   CONFIGURE_COMMAND ""
   BUILD_IN_SOURCE TRUE

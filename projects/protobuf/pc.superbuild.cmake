@@ -9,7 +9,6 @@ ExternalProject_Add(${EP_NAME}
   SOURCE_SUBDIR
     "cmake"
   CMAKE_ARGS
-    cmake
     "-DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>/usr"
     -DBUILD_SHARED_LIBS=ON
     -DCMAKE_INSTALL_LIBDIR=lib

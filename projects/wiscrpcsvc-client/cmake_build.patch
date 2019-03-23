@@ -1,0 +1,44 @@
+diff --git a/libwiscrpcsvc-client/CMakeLists.txt b/libwiscrpcsvc-client/CMakeLists.txt
+new file mode 100644
+index 0000000..52c1fcf
+--- /dev/null
++++ b/libwiscrpcsvc-client/CMakeLists.txt
+@@ -0,0 +1,27 @@
++cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
++project(wiscrpcsvc-client)
++
++set(CMAKE_CXX_STANDARD 11)
++
++find_package(ZLIB REQUIRED)
++
++find_package(Protobuf REQUIRED)
++include_directories(${Protobuf_INCLUDE_DIRS})
++
++protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS rpcmsg.proto)
++include_directories(${CMAKE_CURRENT_BINARY_DIR})
++
++add_library(wiscrpcsvc
++  libwiscrpcsvc.cpp
++  wiscRPCMsg.cpp
++  ${PROTO_SRCS}
++  ${PROTO_HDRS}
++)
++
++target_link_libraries(wiscrpcsvc PRIVATE ${Protobuf_LITE_LIBRARIES})
++target_link_libraries(wiscrpcsvc PRIVATE ZLIB::ZLIB)
++
++install(TARGETS wiscrpcsvc
++  LIBRARY DESTINATION lib/
++)
++
+diff --git a/wiscRPCMsg.cpp b/wiscRPCMsg.cpp
+index b9f864a..5447e75 100644
+--- a/wiscRPCMsg.cpp
++++ b/wiscRPCMsg.cpp
+@@ -1,5 +1,5 @@
+ #include "wiscRPCMsg.h"
+-#include "proto_cpp/rpcmsg.pb.h"
++#include "rpcmsg.pb.h"
+ #include <string.h>
+ #include <arpa/inet.h>
+ 

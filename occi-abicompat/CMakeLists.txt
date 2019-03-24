@@ -5,6 +5,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 include(PreventInSourceBuilds)
 
 # Find OCCI libraries provided by xDAQ
+set(xDAQ_SEARCH_OCCI_COMPAT FALSE) # Don't use another version of this library
 find_package(xDAQ REQUIRED occi)
 
 # Detects the ABI version of the standard library supported by OCCI and sets

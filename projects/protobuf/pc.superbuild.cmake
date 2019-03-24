@@ -13,6 +13,6 @@ ExternalProject_Add(${EP_NAME}
     -DBUILD_SHARED_LIBS=ON
     -DCMAKE_INSTALL_LIBDIR=lib
     # FIXME: build tests only when asked by the user
-    #-Dprotobuf_BUILD_TESTS=OFF
+    -Dprotobuf_BUILD_TESTS=ON
 )
 

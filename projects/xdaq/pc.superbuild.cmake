@@ -40,9 +40,9 @@ ExternalProject_Add(core.${EP_NAME}
 
   CONFIGURE_COMMAND ""
   BUILD_IN_SOURCE TRUE
-  BUILD_COMMAND make
+  BUILD_COMMAND $(MAKE) -j1
     ${_xdaq_core_options}
-  INSTALL_COMMAND make install
+    INSTALL_COMMAND $(MAKE) -j1 install
     ${_xdaq_core_options}
 )
 
@@ -70,9 +70,9 @@ ExternalProject_Add(worksuite.${EP_NAME}
 
   CONFIGURE_COMMAND ""
   BUILD_IN_SOURCE TRUE
-  BUILD_COMMAND make
+  BUILD_COMMAND $(MAKE) -j1
     ${_xdaq_worksuite_options}
-  INSTALL_COMMAND make install
+    INSTALL_COMMAND $(MAKE) -j1 install
     ${_xdaq_worksuite_options}
 
   DEPENDS core.${EP_NAME}

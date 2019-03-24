@@ -15,11 +15,11 @@ ExternalProject_Add(${EP_NAME}
 
   CONFIGURE_COMMAND ""
   BUILD_IN_SOURCE TRUE
-  BUILD_COMMAND make
+  BUILD_COMMAND $(MAKE) -j1
     "SHELL=bash"
     "CACTUS_ROOT=<INSTALL_DIR>/opt/cactus"
     "INSTALL_PREFIX=<INSTALL_DIR>/opt/cactus"
-  INSTALL_COMMAND make install
+    INSTALL_COMMAND $(MAKE) -j1 install
     "SHELL=bash"
     "CACTUS_ROOT=<INSTALL_DIR>/opt/cactus"
     "INSTALL_PREFIX=<INSTALL_DIR>/opt/cactus"

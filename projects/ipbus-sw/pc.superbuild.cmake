@@ -1,3 +1,5 @@
+superbuild_add_dependencies(pugixml)
+
 ExternalProject_Add(${EP_NAME}
   PREFIX "${EP_PREFIX}"
   INSTALL_DIR "${EP_INSTALL_DIR}"
@@ -12,8 +14,14 @@ ExternalProject_Add(${EP_NAME}
   BUILD_COMMAND $(MAKE)
     Set=uhal
     "prefix=<INSTALL_DIR>/opt/cactus"
+    "CPATH=<INSTALL_DIR>/usr/include"
+    "LIBRARY_PATH=<INSTALL_DIR>/usr/lib"
   INSTALL_COMMAND $(MAKE) install
     Set=uhal
     "prefix=<INSTALL_DIR>/opt/cactus"
+    "CPATH=<INSTALL_DIR>/usr/include"
+    "LIBRARY_PATH=<INSTALL_DIR>/usr/lib"
+
+  DEPENDS ${EP_DEPENDENCIES}
 )
 

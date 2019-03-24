@@ -23,7 +23,7 @@ set(SUPERBUILD_INSTALL_DIR
 option(CTP7_BUILD "\
 Build the software running on the CTP7 (ARM architecture). \
 It requires the Xilinx SDK and the CTP7 Linux image sysroot. \
-" ON
+" OFF
 )
 
 option(GLIB_BUILD

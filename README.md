@@ -15,7 +15,7 @@ make
 
 ## Options
 
-* `CTP7_BUILD` : Build the software for the CTP7 (default: ON)
+* `CTP7_BUILD` : Build the software for the CTP7 (default: OFF)
   * `CTP7_SYSROOT` : Sysroot of the CTP7 (required when `CTP7_BUILD=ON`)
 * `GLIB_BUILD` : Build the software for the GLIB (default: OFF)
 * `PC_BUILD` : Build the software for the DAQ machine (default : ON)

@@ -55,7 +55,7 @@ if(OCCI_SUPPORTED_ABI STREQUAL "C++98")
     # Build the ABI wrapper
 
     # C++ 98 ABI
-    add_library(abi98 OBJECT occi-abicompat.cpp)
+    add_library(abi98 STATIC occi-abicompat.cpp)
     set_property(TARGET abi98 PROPERTY POSITION_INDEPENDENT_CODE TRUE)
     target_compile_definitions(abi98 PRIVATE _GLIBCXX_USE_CXX11_ABI=0)
     target_link_libraries(abi98 xDAQ::occi)
@@ -69,8 +69,12 @@ else()
 endif()
 
 # Install
-install(TARGETS occi-abicompat EXPORT OCCICompatConfig LIBRARY)
-install(EXPORT OCCICompatConfig DESTINATION share/OCCICompat)
+include(GNUInstallDirs)
+install(TARGETS occi-abicompat
+        EXPORT OCCICompatConfig
+        LIBRARY
+        DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(EXPORT OCCICompatConfig DESTINATION ${CMAKE_INSTALL_DATADIR}/OCCICompat)
 
 # Test executable
 enable_testing()
